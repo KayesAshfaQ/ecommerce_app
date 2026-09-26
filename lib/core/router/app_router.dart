@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/product/presentation/pages/product_details.dart';
+
 class AppRouter {
   AppRouter._();
 
@@ -11,24 +13,20 @@ class AppRouter {
   static String productDetailRoute(int id) => '/products/$id';
 
   static final GoRouter router = GoRouter(
-    initialLocation: homePath,
+    initialLocation: productDetailPath,
     routes: [
       GoRoute(
         path: homePath,
         name: 'home',
-        builder: (context, state) => const Scaffold(
-          body: Center(child: Text('Products Catalog')),
-        ),
+        builder: (context, state) =>
+            const Scaffold(body: Center(child: Text('Products Catalog'))),
       ),
       GoRoute(
         path: productDetailPath,
         name: 'productDetail',
         builder: (context, state) {
           final id = state.pathParameters['id'] ?? '';
-          return Scaffold(
-            appBar: AppBar(title: Text('Product $id')),
-            body: Center(child: Text('Product Details for ID: $id')),
-          );
+          return ProductDetailScreen(productId: int.tryParse(id) ?? 0);
         },
       ),
       GoRoute(
@@ -48,7 +46,11 @@ class AppRouter {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.redAccent),
+              const Icon(
+                Icons.error_outline,
+                size: 64,
+                color: Colors.redAccent,
+              ),
               const SizedBox(height: 16),
               const Text(
                 '404 - Page Not Found',

@@ -49,6 +49,24 @@ class DioClient {
 
   Dio get dio => _dio;
 
+  Future<Response<dynamic>> get(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    try {
+      return await _dio.get(
+        path,
+        queryParameters: queryParameters,
+        options: options,
+      );
+    } on DioException catch (e) {
+      throw _mapDioException(e);
+    } catch (e) {
+      throw ApiException(e.toString());
+    }
+  }
+
   ApiException _mapDioException(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:

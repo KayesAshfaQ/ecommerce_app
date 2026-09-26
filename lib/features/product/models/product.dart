@@ -1,4 +1,4 @@
-class Product {
+/* class Product {
   final int id;
   final String title;
   final String description;
@@ -6,7 +6,7 @@ class Product {
   final double price;
   final double discountPercentage;
   final double rating;
-  final bool isFavourite;
+  final bool isFavorite;
   final int stock;
   final int sold;
   final List<String> colors;
@@ -49,7 +49,7 @@ class Product {
     required this.meta,
     required this.images,
     required this.thumbnail,
-    required this.isFavourite,
+    required this.isFavorite,
     required this.sold,
     required this.colors,
     required this.sizes,
@@ -78,7 +78,7 @@ class Product {
     Meta? meta,
     List<String>? images,
     String? thumbnail,
-    bool? isFavourite,
+    bool? isFavorite,
     int? sold,
     List<String>? colors,
     List<String>? sizes,
@@ -105,7 +105,7 @@ class Product {
     meta: meta ?? this.meta,
     images: images ?? this.images,
     thumbnail: thumbnail ?? this.thumbnail,
-    isFavourite: isFavourite ?? this.isFavourite,
+    isFavorite: isFavorite ?? this.isFavorite,
     sold: sold ?? this.sold,
     colors: colors ?? this.colors,
     sizes: sizes ?? this.sizes,
@@ -134,7 +134,7 @@ class Product {
     meta: Meta.fromMap(json["meta"]),
     images: List<String>.from(json["images"].map((x) => x)),
     thumbnail: json["thumbnail"],
-    isFavourite: json["isFavourite"],
+    isFavorite: json["isFavorite"],
     sold: json["sold"],
     colors: List<String>.from(json["colors"].map((x) => x)),
     sizes: List<String>.from(json["sizes"].map((x) => x)),
@@ -163,7 +163,7 @@ class Product {
     "meta": meta.toMap(),
     "images": List<dynamic>.from(images.map((x) => x)),
     "thumbnail": thumbnail,
-    "isFavourite": isFavourite,
+    "isFavorite": isFavorite,
     "sold": sold,
     "colors": List<dynamic>.from(colors.map((x) => x)),
     "sizes": List<dynamic>.from(sizes.map((x) => x)),
@@ -282,3 +282,91 @@ class Review {
     "reviewerEmail": reviewerEmail,
   };
 }
+ */
+
+class Product {
+  final int id;
+  final String title;
+  final String description;
+  final double price;
+  final double rating;
+  final int stock;
+  final String brand;
+  final String category;
+  final String thumbnail;
+  final List<String> images;
+
+  const Product({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    this.rating = 0.0,
+    this.stock = 0,
+    this.brand = '',
+    this.category = '',
+    this.thumbnail = '',
+    this.images = const [],
+  });
+
+  factory Product.fromMap(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'] as int? ?? 0,
+      title: json['title'] as String? ?? 'Unnamed Product',
+      description: json['description'] as String? ?? '',
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+      stock: json['stock'] as int? ?? 0,
+      brand: json['brand'] as String? ?? '',
+      category: json['category'] as String? ?? '',
+      thumbnail: json['thumbnail'] as String? ?? '',
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'price': price,
+      'rating': rating,
+      'stock': stock,
+      'brand': brand,
+      'category': category,
+      'thumbnail': thumbnail,
+      'images': images,
+    };
+  }
+
+  Product copyWith({
+    int? id,
+    String? title,
+    String? description,
+    double? price,
+    double? rating,
+    int? stock,
+    String? brand,
+    String? category,
+    String? thumbnail,
+    List<String>? images,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      price: price ?? this.price,
+      rating: rating ?? this.rating,
+      stock: stock ?? this.stock,
+      brand: brand ?? this.brand,
+      category: category ?? this.category,
+      thumbnail: thumbnail ?? this.thumbnail,
+      images: images ?? this.images,
+    );
+  }
+}
+
+
