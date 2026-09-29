@@ -19,8 +19,8 @@ class ProductProvider extends ChangeNotifier {
     this.autoFetch = true,
   }) {
     if (autoFetch) {
-      fetchProducts();
-      fetchCategories();
+      // fetchProducts();
+      // fetchCategories();
     }
   }
 

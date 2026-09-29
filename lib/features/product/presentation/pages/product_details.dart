@@ -51,9 +51,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   height: 320,
                   width: double.infinity,
                   color: isDark ? Colors.black38 : Colors.grey.shade100,
-                  child: product.thumbnail.isNotEmpty
+                  child: product.thumbnail?.isNotEmpty == true
                       ? Image.network(
-                          product.thumbnail,
+                          product.thumbnail!,
                           fit: BoxFit.cover,
                           errorBuilder: (_, _, _) => const Center(
                             child: Icon(
@@ -90,7 +90,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              product.category.toUpperCase(),
+                              (product.category ?? '').toUpperCase(),
                               style: const TextStyle(
                                 color: AppColors.primary,
                                 fontSize: 12,
@@ -118,7 +118,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        product.title,
+                        product.title ?? "",
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -126,7 +126,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '\$${product.price.toStringAsFixed(2)}',
+                        '\$${product.price?.toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w800,
@@ -143,7 +143,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        product.description,
+                        product.description ?? "",
                         style: TextStyle(
                           fontSize: 15,
                           height: 1.5,
@@ -236,7 +236,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   },
                   icon: const Icon(CupertinoIcons.cart_badge_plus),
                   label: Text(
-                    'Add to Cart • \$${(product.price * _quantity).toStringAsFixed(2)}',
+                    'Add to Cart • \$${((product.price ?? 0) * _quantity).toStringAsFixed(2)}',
                   ),
                 ),
               ),

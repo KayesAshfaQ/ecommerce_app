@@ -1,58 +1,58 @@
-/* class Product {
-  final int id;
-  final String title;
-  final String description;
-  final String category;
-  final double price;
-  final double discountPercentage;
-  final double rating;
-  final bool isFavorite;
-  final int stock;
-  final int sold;
-  final List<String> colors;
-  final List<String> sizes;
-  final List<String> tags;
-  final String brand;
-  final String sku;
-  final int weight;
-  final Dimensions dimensions;
-  final String warrantyInformation;
-  final String shippingInformation;
-  final String availabilityStatus;
-  final List<Review> reviews;
-  final String returnPolicy;
-  final int minimumOrderQuantity;
-  final Meta meta;
-  final List<String> images;
-  final String thumbnail;
+class Product {
+  final int? id;
+  final String? title;
+  final String? description;
+  final String? category;
+  final double? price;
+  final double? discountPercentage;
+  final double? rating;
+  final bool? isFavorite;
+  final int? stock;
+  final int? sold;
+  final List<String>? colors;
+  final List<String>? sizes;
+  final List<String>? tags;
+  final String? brand;
+  final String? sku;
+  final int? weight;
+  final Dimensions? dimensions;
+  final String? warrantyInformation;
+  final String? shippingInformation;
+  final String? availabilityStatus;
+  final List<Review>? reviews;
+  final String? returnPolicy;
+  final int? minimumOrderQuantity;
+  final Meta? meta;
+  final List<String>? images;
+  final String? thumbnail;
 
   Product({
     required this.id,
     required this.title,
     required this.description,
-    required this.category,
     required this.price,
-    required this.discountPercentage,
-    required this.rating,
-    required this.stock,
-    required this.tags,
-    required this.brand,
-    required this.sku,
-    required this.weight,
-    required this.dimensions,
-    required this.warrantyInformation,
-    required this.shippingInformation,
-    required this.availabilityStatus,
-    required this.reviews,
-    required this.returnPolicy,
-    required this.minimumOrderQuantity,
-    required this.meta,
-    required this.images,
-    required this.thumbnail,
-    required this.isFavorite,
-    required this.sold,
-    required this.colors,
-    required this.sizes,
+    this.category = '',
+    this.discountPercentage = 0.0,
+    this.rating = 0.0,
+    this.stock = 0,
+    this.tags = const [],
+    this.brand = '',
+    this.sku = '',
+    this.weight = 0,
+    this.dimensions = const Dimensions(width: 0, height: 0, depth: 0),
+    this.warrantyInformation = '',
+    this.shippingInformation = '',
+    this.availabilityStatus = '',
+    this.reviews = const [],
+    this.returnPolicy = '',
+    this.minimumOrderQuantity = 1,
+    this.meta = const Meta(),
+    this.images = const [],
+    this.thumbnail = '',
+    this.isFavorite = false,
+    this.sold = 0,
+    this.colors = const [],
+    this.sizes = const [],
   });
 
   Product copyWith({
@@ -120,7 +120,7 @@
     discountPercentage: json["discountPercentage"]?.toDouble(),
     rating: json["rating"]?.toDouble(),
     stock: json["stock"],
-    tags: List<String>.from(json["tags"].map((x) => x)),
+    tags: List<String>.from((json["tags"] ?? []).map((x) => x) ?? []),
     brand: json["brand"],
     sku: json["sku"],
     weight: json["weight"],
@@ -128,16 +128,18 @@
     warrantyInformation: json["warrantyInformation"],
     shippingInformation: json["shippingInformation"],
     availabilityStatus: json["availabilityStatus"],
-    reviews: List<Review>.from(json["reviews"].map((x) => Review.fromMap(x))),
+    reviews: List<Review>.from(
+      (json["reviews"] ?? []).map((x) => Review.fromMap(x)),
+    ),
     returnPolicy: json["returnPolicy"],
     minimumOrderQuantity: json["minimumOrderQuantity"],
     meta: Meta.fromMap(json["meta"]),
-    images: List<String>.from(json["images"].map((x) => x)),
+    images: List<String>.from((json["images"] ?? []).map((x) => x)),
     thumbnail: json["thumbnail"],
     isFavorite: json["isFavorite"],
     sold: json["sold"],
-    colors: List<String>.from(json["colors"].map((x) => x)),
-    sizes: List<String>.from(json["sizes"].map((x) => x)),
+    colors: List<String>.from((json["colors"] ?? []).map((x) => x)),
+    sizes: List<String>.from((json["sizes"] ?? []).map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
@@ -149,33 +151,37 @@
     "discountPercentage": discountPercentage,
     "rating": rating,
     "stock": stock,
-    "tags": List<dynamic>.from(tags.map((x) => x)),
+    "tags": List<dynamic>.from(tags?.map((x) => x) ?? []),
     "brand": brand,
     "sku": sku,
     "weight": weight,
-    "dimensions": dimensions.toMap(),
+    "dimensions": dimensions?.toMap(),
     "warrantyInformation": warrantyInformation,
     "shippingInformation": shippingInformation,
     "availabilityStatus": availabilityStatus,
-    "reviews": List<dynamic>.from(reviews.map((x) => x.toMap())),
+    "reviews": List<dynamic>.from(reviews?.map((x) => x.toMap()) ?? []),
     "returnPolicy": returnPolicy,
     "minimumOrderQuantity": minimumOrderQuantity,
-    "meta": meta.toMap(),
-    "images": List<dynamic>.from(images.map((x) => x)),
+    "meta": meta?.toMap(),
+    "images": List<dynamic>.from(images?.map((x) => x) ?? []),
     "thumbnail": thumbnail,
     "isFavorite": isFavorite,
     "sold": sold,
-    "colors": List<dynamic>.from(colors.map((x) => x)),
-    "sizes": List<dynamic>.from(sizes.map((x) => x)),
+    "colors": List<dynamic>.from(colors?.map((x) => x) ?? []),
+    "sizes": List<dynamic>.from(sizes?.map((x) => x) ?? []),
   };
 }
 
 class Dimensions {
-  final double width;
-  final double height;
-  final double depth;
+  final double? width;
+  final double? height;
+  final double? depth;
 
-  Dimensions({required this.width, required this.height, required this.depth});
+  const Dimensions({
+    required this.width,
+    required this.height,
+    required this.depth,
+  });
 
   Dimensions copyWith({double? width, double? height, double? depth}) =>
       Dimensions(
@@ -198,17 +204,12 @@ class Dimensions {
 }
 
 class Meta {
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final String barcode;
-  final String qrCode;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final String? barcode;
+  final String? qrCode;
 
-  Meta({
-    required this.createdAt,
-    required this.updatedAt,
-    required this.barcode,
-    required this.qrCode,
-  });
+  const Meta({this.createdAt, this.updatedAt, this.barcode, this.qrCode});
 
   Meta copyWith({
     DateTime? createdAt,
@@ -230,26 +231,26 @@ class Meta {
   );
 
   Map<String, dynamic> toMap() => {
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
     "barcode": barcode,
     "qrCode": qrCode,
   };
 }
 
 class Review {
-  final int rating;
-  final String comment;
-  final DateTime date;
-  final String reviewerName;
-  final String reviewerEmail;
+  final int? rating;
+  final String? comment;
+  final DateTime? date;
+  final String? reviewerName;
+  final String? reviewerEmail;
 
   Review({
-    required this.rating,
-    required this.comment,
-    required this.date,
-    required this.reviewerName,
-    required this.reviewerEmail,
+    this.rating,
+    this.comment,
+    this.date,
+    this.reviewerName,
+    this.reviewerEmail,
   });
 
   Review copyWith({
@@ -277,13 +278,13 @@ class Review {
   Map<String, dynamic> toMap() => {
     "rating": rating,
     "comment": comment,
-    "date": date.toIso8601String(),
+    "date": date?.toIso8601String(),
     "reviewerName": reviewerName,
     "reviewerEmail": reviewerEmail,
   };
 }
- */
 
+/* 
 class Product {
   final int id;
   final String title;
@@ -368,5 +369,4 @@ class Product {
     );
   }
 }
-
-
+ */
