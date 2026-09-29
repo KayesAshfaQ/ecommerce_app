@@ -1,5 +1,9 @@
+import 'package:ecommerce_app/core/router/app_router.dart';
+import 'package:ecommerce_app/features/cart/models/cart_item.dart';
+import 'package:ecommerce_app/features/cart/provider/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../provider/product_provider.dart';
@@ -227,12 +231,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: SafeArea(
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    /* ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Coming soon.'),
                         behavior: SnackBarBehavior.floating,
                       ),
-                    );
+                    ); */
+                    context.read<CartProvider>().addItem(CartItem(product: product,  quantity: _quantity));
+
+                    context.go(AppRouter.cartPath);
+
                   },
                   icon: const Icon(CupertinoIcons.cart_badge_plus),
                   label: Text(

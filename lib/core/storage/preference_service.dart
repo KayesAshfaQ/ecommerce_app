@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/api_constants.dart';
 
@@ -33,4 +35,23 @@ class PreferenceService {
   Future<bool> remove(String key) => _prefs.remove(key);
 
   Future<bool> clearAll() => _prefs.clear();
+
+  // Cart Cache
+  Future<bool> setCartCache(List<Map<String, dynamic>> items) async {
+    return await _prefs.setString(
+      ApiConstants.cachedCartKey,
+      jsonEncode(items),
+    );
+  }
+
+  List<Map<String, dynamic>> getCartCache() {
+    final raw = _prefs.getString(ApiConstants.cachedCartKey);
+    if (raw == null || raw.isEmpty) return [];
+    try {
+      final decoded = jsonDecode(raw) as List<dynamic>;
+      return decoded.map((e) => Map<String, dynamic>.from(e as Map)).toList();
+    } catch (_) {
+      return [];
+    }
+  }
 }

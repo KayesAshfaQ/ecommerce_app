@@ -8,5 +8,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final preferenceService = await PreferenceService.init();
   final dioClient = DioClient(preferenceService: preferenceService);
-  runApp(MyApp(dioClient: dioClient));
+  runApp(MyApp(dioClient: dioClient, preferenceService: preferenceService));
 }
