@@ -58,7 +58,18 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 342,
+      "colors": [
+        "Black",
+        "Soft Black",
+        "Dark Brown"
+      ],
+      "sizes": [
+        "Standard (12ml)",
+        "Travel Size (6ml)"
+      ]
     },
     {
       "id": 2,
@@ -118,7 +129,20 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 185,
+      "colors": [
+        "Nude Classic",
+        "Rose Gold Glow",
+        "Smokey Dusk",
+        "Warm Sunset"
+      ],
+      "sizes": [
+        "12 Shades",
+        "18 Shades",
+        "24 Shades Deluxe"
+      ]
     },
     {
       "id": 3,
@@ -178,7 +202,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp",
+      "sold": 94,
+      "colors": [
+        "Translucent",
+        "Fair Light",
+        "Medium Warm",
+        "Deep Honey"
+      ],
+      "sizes": [
+        "10g Compact",
+        "20g Standard",
+        "35g Pro"
+      ]
     },
     {
       "id": 4,
@@ -238,7 +274,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 520,
+      "colors": [
+        "Ruby Red",
+        "Crimson Velvet",
+        "Scarlet Rose",
+        "Deep Burgundy"
+      ],
+      "sizes": [
+        "Standard 3.5g",
+        "Mini 1.5g"
+      ]
     },
     {
       "id": 5,
@@ -298,7 +346,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 210,
+      "colors": [
+        "Cherry Gloss",
+        "Bordeaux Red",
+        "Poppy Crimson",
+        "Wine Sparkle"
+      ],
+      "sizes": [
+        "10ml Bottle",
+        "15ml Salon Size"
+      ]
     },
     {
       "id": 6,
@@ -360,7 +420,19 @@
         "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/2.webp",
         "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 610,
+      "colors": [
+        "Frosted Silver",
+        "Clear Glass",
+        "Matte Edition"
+      ],
+      "sizes": [
+        "50ml",
+        "100ml",
+        "200ml"
+      ]
     },
     {
       "id": 7,
@@ -422,7 +494,18 @@
         "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/2.webp",
         "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 430,
+      "colors": [
+        "Noir Black",
+        "Amber Gold"
+      ],
+      "sizes": [
+        "35ml",
+        "50ml",
+        "100ml"
+      ]
     },
     {
       "id": 8,
@@ -484,7 +567,19 @@
         "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/2.webp",
         "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 780,
+      "colors": [
+        "Luminous Gold",
+        "Champagne Shimmer"
+      ],
+      "sizes": [
+        "30ml",
+        "50ml",
+        "100ml",
+        "150ml"
+      ]
     },
     {
       "id": 9,
@@ -546,7 +641,18 @@
         "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/2.webp",
         "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 125,
+      "colors": [
+        "Sunny Yellow",
+        "Citrus Glow"
+      ],
+      "sizes": [
+        "30ml",
+        "50ml",
+        "75ml"
+      ]
     },
     {
       "id": 10,
@@ -608,7 +714,18 @@
         "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/2.webp",
         "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 340,
+      "colors": [
+        "Powder Blush",
+        "Vintage Rose"
+      ],
+      "sizes": [
+        "30ml",
+        "50ml",
+        "100ml"
+      ]
     },
     {
       "id": 11,
@@ -670,7 +787,20 @@
         "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/2.webp",
         "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 28,
+      "colors": [
+        "Walnut Finish",
+        "Dark Espresso",
+        "Natural Oak",
+        "Charcoal Grey"
+      ],
+      "sizes": [
+        "Queen",
+        "King",
+        "California King"
+      ]
     },
     {
       "id": 12,
@@ -732,7 +862,20 @@
         "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/2.webp",
         "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 42,
+      "colors": [
+        "Royal Navy",
+        "Emerald Green",
+        "Slate Grey",
+        "Warm Ivory"
+      ],
+      "sizes": [
+        "2-Seater",
+        "3-Seater",
+        "L-Sectional"
+      ]
     },
     {
       "id": 13,
@@ -794,7 +937,18 @@
         "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/2.webp",
         "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 88,
+      "colors": [
+        "African Cherry",
+        "Smoked Oak",
+        "Glossy Ebony"
+      ],
+      "sizes": [
+        "Standard (1 Drawer)",
+        "Large (2 Drawers)"
+      ]
     },
     {
       "id": 14,
@@ -856,7 +1010,19 @@
         "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/2.webp",
         "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 67,
+      "colors": [
+        "Classic Black",
+        "Cognac Brown",
+        "Pearl Grey",
+        "Navy Velvet"
+      ],
+      "sizes": [
+        "Standard Swivel",
+        "High-Back Executive"
+      ]
     },
     {
       "id": 15,
@@ -918,7 +1084,20 @@
         "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/2.webp",
         "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 35,
+      "colors": [
+        "Teak Natural",
+        "Rustic Oak",
+        "Matte White Wood"
+      ],
+      "sizes": [
+        "24 Inch",
+        "30 Inch",
+        "36 Inch",
+        "48 Inch Double"
+      ]
     },
     {
       "id": 16,
@@ -976,7 +1155,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/apple/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/apple/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/apple/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 1250,
+      "colors": [
+        "Ruby Red",
+        "Granny Smith Green",
+        "Golden Gala"
+      ],
+      "sizes": [
+        "500g Bag",
+        "1kg Bag",
+        "2kg Family Crate"
+      ]
     },
     {
       "id": 17,
@@ -1034,7 +1225,18 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/beef-steak/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/beef-steak/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/beef-steak/thumbnail.webp",
+      "sold": 410,
+      "colors": [
+        "Prime Cut",
+        "Ribeye Tender",
+        "Sirloin Premium"
+      ],
+      "sizes": [
+        "250g",
+        "500g",
+        "1kg Pack"
+      ]
     },
     {
       "id": 18,
@@ -1093,7 +1295,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/cat-food/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cat-food/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cat-food/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 890,
+      "colors": [
+        "Wild Salmon",
+        "Tuna & Whitefish",
+        "Savory Chicken"
+      ],
+      "sizes": [
+        "85g Can",
+        "1.5kg Bag",
+        "3kg Value Bag"
+      ]
     },
     {
       "id": 19,
@@ -1152,7 +1366,19 @@
         "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/1.webp",
         "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/2.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 980,
+      "colors": [
+        "Boneless Breast",
+        "Tender Thighs",
+        "Whole Fresh Cut"
+      ],
+      "sizes": [
+        "500g Tray",
+        "1kg Pack",
+        "2kg Family Pack"
+      ]
     },
     {
       "id": 20,
@@ -1210,7 +1436,20 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 760,
+      "colors": [
+        "Pure Sunflower",
+        "Extra Virgin Olive",
+        "Canola Gold"
+      ],
+      "sizes": [
+        "500ml Bottle",
+        "1L Bottle",
+        "2L Jug",
+        "5L Can"
+      ]
     },
     {
       "id": 21,
@@ -1268,7 +1507,18 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/cucumber/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cucumber/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cucumber/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 540,
+      "colors": [
+        "Crisp Green",
+        "Dark English"
+      ],
+      "sizes": [
+        "3 Pack",
+        "500g Pack",
+        "1kg Pack"
+      ]
     },
     {
       "id": 22,
@@ -1327,7 +1577,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/dog-food/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/dog-food/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/dog-food/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 620,
+      "colors": [
+        "Beef & Brown Rice",
+        "Roasted Chicken Feast",
+        "Wild Lamb"
+      ],
+      "sizes": [
+        "3kg Bag",
+        "7kg Bag",
+        "15kg Value Pack"
+      ]
     },
     {
       "id": 23,
@@ -1385,7 +1647,18 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/eggs/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/eggs/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/eggs/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 1820,
+      "colors": [
+        "Pasture Brown",
+        "Organic White"
+      ],
+      "sizes": [
+        "6 Pack",
+        "12 Pack Carton",
+        "30 Pack Flat"
+      ]
     },
     {
       "id": 24,
@@ -1443,7 +1716,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/fish-steak/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/fish-steak/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/fish-steak/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 340,
+      "colors": [
+        "Atlantic Salmon",
+        "Wild Cod",
+        "Yellowfin Tuna"
+      ],
+      "sizes": [
+        "300g Pack",
+        "600g Pack",
+        "1kg Value Pack"
+      ]
     },
     {
       "id": 25,
@@ -1501,7 +1786,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/green-bell-pepper/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/green-bell-pepper/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/green-bell-pepper/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 480,
+      "colors": [
+        "Crisp Emerald Green",
+        "Sunny Yellow",
+        "Sweet Red"
+      ],
+      "sizes": [
+        "2 Pack",
+        "500g Pack",
+        "1kg Pack"
+      ]
     },
     {
       "id": 26,
@@ -1559,7 +1856,18 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/green-chili-pepper/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/green-chili-pepper/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/green-chili-pepper/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 390,
+      "colors": [
+        "Fresh Green",
+        "Fiery Red"
+      ],
+      "sizes": [
+        "100g Pouch",
+        "250g Pack",
+        "500g Pack"
+      ]
     },
     {
       "id": 27,
@@ -1617,7 +1925,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/honey-jar/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/honey-jar/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/honey-jar/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 510,
+      "colors": [
+        "Wildflower Amber",
+        "Golden Clover",
+        "Dark Forest Honey"
+      ],
+      "sizes": [
+        "250g Glass Jar",
+        "500g Glass Jar",
+        "1kg Bottle"
+      ]
     },
     {
       "id": 28,
@@ -1678,7 +1998,20 @@
         "https://cdn.dummyjson.com/product-images/groceries/ice-cream/3.webp",
         "https://cdn.dummyjson.com/product-images/groceries/ice-cream/4.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/ice-cream/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/ice-cream/thumbnail.webp",
+      "isFavourite": true,
+      "sold": 1120,
+      "colors": [
+        "Madagascar Vanilla",
+        "Belgian Chocolate",
+        "Wild Strawberry",
+        "Mint Chip"
+      ],
+      "sizes": [
+        "473ml Pint",
+        "1L Tub",
+        "2L Family Tub"
+      ]
     },
     {
       "id": 29,
@@ -1736,7 +2069,19 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/juice/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/juice/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/juice/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 870,
+      "colors": [
+        "Pure Orange Pulp",
+        "Crisp Apple",
+        "Pomegranate Berry"
+      ],
+      "sizes": [
+        "330ml Bottle",
+        "1L Carton",
+        "2L Family Jug"
+      ]
     },
     {
       "id": 30,
@@ -1794,7 +2139,18 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/groceries/kiwi/1.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/kiwi/thumbnail.webp"
+      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/kiwi/thumbnail.webp",
+      "isFavourite": false,
+      "sold": 295,
+      "colors": [
+        "Classic Green",
+        "SunGold Sweet"
+      ],
+      "sizes": [
+        "4 Pack Tray",
+        "500g Basket",
+        "1kg Box"
+      ]
     }
   ],
   "orders": [

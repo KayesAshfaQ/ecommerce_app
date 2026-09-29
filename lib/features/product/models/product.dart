@@ -6,7 +6,7 @@ class Product {
   final double? price;
   final double? discountPercentage;
   final double? rating;
-  final bool? isFavorite;
+  final bool? isFavourite;
   final int? stock;
   final int? sold;
   final List<String>? colors;
@@ -49,7 +49,7 @@ class Product {
     this.meta = const Meta(),
     this.images = const [],
     this.thumbnail = '',
-    this.isFavorite = false,
+    this.isFavourite = false,
     this.sold = 0,
     this.colors = const [],
     this.sizes = const [],
@@ -78,7 +78,7 @@ class Product {
     Meta? meta,
     List<String>? images,
     String? thumbnail,
-    bool? isFavorite,
+    bool? isFavourite,
     int? sold,
     List<String>? colors,
     List<String>? sizes,
@@ -105,7 +105,7 @@ class Product {
     meta: meta ?? this.meta,
     images: images ?? this.images,
     thumbnail: thumbnail ?? this.thumbnail,
-    isFavorite: isFavorite ?? this.isFavorite,
+    isFavourite: isFavourite ?? this.isFavourite,
     sold: sold ?? this.sold,
     colors: colors ?? this.colors,
     sizes: sizes ?? this.sizes,
@@ -136,8 +136,8 @@ class Product {
     meta: Meta.fromMap(json["meta"]),
     images: List<String>.from((json["images"] ?? []).map((x) => x)),
     thumbnail: json["thumbnail"],
-    isFavorite: json["isFavorite"],
-    sold: json["sold"],
+    isFavourite: json["isFavourite"] ?? json["isFavourite"] ?? false,
+    sold: json["sold"] ?? 0,
     colors: List<String>.from((json["colors"] ?? []).map((x) => x)),
     sizes: List<String>.from((json["sizes"] ?? []).map((x) => x)),
   );
@@ -165,7 +165,8 @@ class Product {
     "meta": meta?.toMap(),
     "images": List<dynamic>.from(images?.map((x) => x) ?? []),
     "thumbnail": thumbnail,
-    "isFavorite": isFavorite,
+    "isFavourite": isFavourite,
+    "isFavourite": isFavourite,
     "sold": sold,
     "colors": List<dynamic>.from(colors?.map((x) => x) ?? []),
     "sizes": List<dynamic>.from(sizes?.map((x) => x) ?? []),
