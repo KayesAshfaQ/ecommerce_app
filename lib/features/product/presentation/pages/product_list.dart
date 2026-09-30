@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ecommerce_app/core/router/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -73,7 +74,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               IconButton(
                 icon: const Icon(CupertinoIcons.cart),
                 tooltip: 'Cart',
-                onPressed: () => context.push('/cart'),
+                onPressed: () => context.push(AppRouter.cartPath),
               ),
               if (cartProvider.itemCount > 0)
                 Positioned(

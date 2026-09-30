@@ -9,7 +9,7 @@ class AppRouter {
   AppRouter._();
 
   static const String homePath = '/';
-  static const String productDetailPath = '/product/:id';
+  static const String _productDetailPath = '/product/:id';
   static const String cartPath = '/cart';
 
   static String productDetailRoute(int id) => '/product/$id';
@@ -23,7 +23,7 @@ class AppRouter {
         builder: (context, state) => ProductListScreen(),
       ),
       GoRoute(
-        path: productDetailPath,
+        path: _productDetailPath,
         name: 'productDetail',
         builder: (context, state) {
           final id = state.pathParameters['id'] ?? '';
