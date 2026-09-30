@@ -67,7 +67,7 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _selectedProduct = await productRepository.getProductById(7);
+      _selectedProduct = await productRepository.getProductById(id);
     } catch (e) {
       _errorMessage = e.toString();
     } finally {

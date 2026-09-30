@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/router/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,7 @@ class ProductCard extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
-      onTap: () => context.push('/product/${product.id}'),
+      onTap: () => context.push(AppRouter.productDetailRoute(product.id!)),
       child: Container(
         decoration: BoxDecoration(
           color: isDark ? AppColors.cardDark : AppColors.cardLight,

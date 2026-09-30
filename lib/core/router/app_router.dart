@@ -9,10 +9,10 @@ class AppRouter {
   AppRouter._();
 
   static const String homePath = '/';
-  static const String productDetailPath = '/products/:id';
+  static const String productDetailPath = '/product/:id';
   static const String cartPath = '/cart';
 
-  static String productDetailRoute(int id) => '/products/$id';
+  static String productDetailRoute(int id) => '/product/$id';
 
   static final GoRouter router = GoRouter(
     initialLocation: homePath,
