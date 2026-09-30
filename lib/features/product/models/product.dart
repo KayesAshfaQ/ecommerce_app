@@ -28,9 +28,9 @@ class Product {
 
   Product({
     required this.id,
-    required this.title,
-    required this.description,
-    required this.price,
+    this.title = '',
+    this.description = '',
+    this.price = 0.0,
     this.category = '',
     this.discountPercentage = 0.0,
     this.rating = 0.0,
@@ -120,26 +120,36 @@ class Product {
     discountPercentage: json["discountPercentage"]?.toDouble(),
     rating: json["rating"]?.toDouble(),
     stock: json["stock"],
-    tags: List<String>.from((json["tags"] ?? []).map((x) => x) ?? []),
+    tags: json["tags"] != null
+        ? List<String>.from((json["tags"]).map((x) => x))
+        : const [],
     brand: json["brand"],
     sku: json["sku"],
     weight: json["weight"],
-    dimensions: Dimensions.fromMap(json["dimensions"]),
+    dimensions: json["dimensions"] != null
+        ? Dimensions.fromMap(json["dimensions"])
+        : null,
     warrantyInformation: json["warrantyInformation"],
     shippingInformation: json["shippingInformation"],
     availabilityStatus: json["availabilityStatus"],
-    reviews: List<Review>.from(
-      (json["reviews"] ?? []).map((x) => Review.fromMap(x)),
-    ),
+    reviews: json["reviews"] != null
+        ? List<Review>.from(json["reviews"].map((x) => Review.fromMap(x)))
+        : const [],
     returnPolicy: json["returnPolicy"],
     minimumOrderQuantity: json["minimumOrderQuantity"],
-    meta: Meta.fromMap(json["meta"]),
-    images: List<String>.from((json["images"] ?? []).map((x) => x)),
+    meta: json["meta"] != null ? Meta.fromMap(json["meta"]) : null,
+    images: json["images"] != null
+        ? List<String>.from((json["images"]).map((x) => x))
+        : const [],
     thumbnail: json["thumbnail"],
-    isFavourite: json["isFavourite"] ?? json["isFavourite"] ?? false,
+    isFavourite: json["isFavourite"] ?? false,
     sold: json["sold"] ?? 0,
-    colors: List<String>.from((json["colors"] ?? []).map((x) => x)),
-    sizes: List<String>.from((json["sizes"] ?? []).map((x) => x)),
+    colors: json["colors"] != null
+        ? List<String>.from((json["colors"]).map((x) => x))
+        : const [],
+    sizes: json["sizes"] != null
+        ? List<String>.from((json["sizes"]).map((x) => x))
+        : const [],
   );
 
   Map<String, dynamic> toMap() => {
@@ -177,11 +187,7 @@ class Dimensions {
   final double? height;
   final double? depth;
 
-  const Dimensions({
-    required this.width,
-    required this.height,
-    required this.depth,
-  });
+  const Dimensions({this.width, this.height, this.depth});
 
   Dimensions copyWith({double? width, double? height, double? depth}) =>
       Dimensions(
@@ -224,8 +230,12 @@ class Meta {
   );
 
   factory Meta.fromMap(Map<String, dynamic> json) => Meta(
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
+    createdAt: json["createdAt"] != null
+        ? DateTime.tryParse(json["createdAt"].toString())
+        : null,
+    updatedAt: json["updatedAt"] != null
+        ? DateTime.tryParse(json["updatedAt"].toString())
+        : null,
     barcode: json["barcode"],
     qrCode: json["qrCode"],
   );
