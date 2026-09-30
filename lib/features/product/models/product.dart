@@ -166,7 +166,6 @@ class Product {
     "images": List<dynamic>.from(images?.map((x) => x) ?? []),
     "thumbnail": thumbnail,
     "isFavourite": isFavourite,
-    "isFavourite": isFavourite,
     "sold": sold,
     "colors": List<dynamic>.from(colors?.map((x) => x) ?? []),
     "sizes": List<dynamic>.from(sizes?.map((x) => x) ?? []),

@@ -231,16 +231,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: SafeArea(
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    /* ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Coming soon.'),
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    ); */
-                    context.read<CartProvider>().addItem(CartItem(product: product,  quantity: _quantity));
+                    context.read<CartProvider>().addItem(
+                      CartItem(product: product, quantity: _quantity),
+                    );
 
-                    context.go(AppRouter.cartPath);
-
+                    context.push(AppRouter.cartPath);
                   },
                   icon: const Icon(CupertinoIcons.cart_badge_plus),
                   label: Text(

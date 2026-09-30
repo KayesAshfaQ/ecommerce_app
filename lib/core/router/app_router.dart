@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/cart/presentation/pages/cart_screen.dart';
 import '../../features/product/presentation/pages/product_details.dart';
 
 class AppRouter {
@@ -32,10 +33,7 @@ class AppRouter {
       GoRoute(
         path: cartPath,
         name: 'cart',
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: const Text('My Cart')),
-          body: const Center(child: Text('Shopping Cart')),
-        ),
+        builder: (context, state) => const CartScreen(),
       ),
     ],
     errorBuilder: (context, state) => Scaffold(
