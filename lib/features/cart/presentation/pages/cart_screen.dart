@@ -1,9 +1,11 @@
-import 'package:ecommerce_app/features/cart/provider/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../../core/constants/app_colors.dart';
+import '../../../../core/router/app_router.dart';
+import '../../provider/cart_provider.dart';
 import '../widgets/cart_item_tile.dart';
 
 class CartScreen extends StatelessWidget {
@@ -27,7 +29,9 @@ class CartScreen extends StatelessWidget {
                   context: context,
                   builder: (ctx) => AlertDialog(
                     title: const Text('Clear Cart'),
-                    content: const Text('Are you sure you want to remove all items from your cart?'),
+                    content: const Text(
+                      'Are you sure you want to remove all items from your cart?',
+                    ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(ctx),
@@ -38,7 +42,10 @@ class CartScreen extends StatelessWidget {
                           cartProvider.clearCart();
                           Navigator.pop(ctx);
                         },
-                        child: const Text('Clear', style: TextStyle(color: AppColors.error)),
+                        child: const Text(
+                          'Clear',
+                          style: TextStyle(color: AppColors.error),
+                        ),
                       ),
                     ],
                   ),
@@ -69,7 +76,10 @@ class CartScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                     const Text(
                       'Your cart is empty',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     const Text(
@@ -92,22 +102,35 @@ class CartScreen extends StatelessWidget {
               separatorBuilder: (_, _) => const SizedBox(height: 12),
               itemBuilder: (context, index) {
                 final item = cartProvider.items[index];
-                return Dismissible(
-                  key: ValueKey(item.product.id),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.only(right: 20),
-                    decoration: BoxDecoration(
-                      color: AppColors.error,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Icon(CupertinoIcons.delete, color: Colors.white),
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.only(right: 20),
+                          decoration: BoxDecoration(
+                            color: AppColors.error,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: const Icon(
+                            CupertinoIcons.delete,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Dismissible(
+                        key: ValueKey(item.product.id),
+                        direction: DismissDirection.endToStart,
+                        background: const SizedBox.shrink(),
+                        onDismissed: (_) {
+                          cartProvider.removeItem(item.product.id);
+                        },
+                        child: CartItemTile(item: item),
+                      ),
+                    ],
                   ),
-                  onDismissed: (_) {
-                    cartProvider.removeItem(item.product.id);
-                  },
-                  child: CartItemTile(item: item),
                 );
               },
             ),
@@ -119,7 +142,9 @@ class CartScreen extends StatelessWidget {
                 color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
                 border: Border(
                   top: BorderSide(
-                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                    color: isDark
+                        ? AppColors.borderDark
+                        : AppColors.borderLight,
                   ),
                 ),
                 boxShadow: [
@@ -132,12 +157,16 @@ class CartScreen extends StatelessWidget {
               ),
               child: SafeArea(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Subtotal', style: TextStyle(color: Colors.grey)),
+                        const Text(
+                          'Subtotal',
+                          style: TextStyle(color: Colors.grey),
+                        ),
                         Text('\$${cartProvider.subtotal.toStringAsFixed(2)}'),
                       ],
                     ),
@@ -145,7 +174,10 @@ class CartScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Estimated Tax (8%)', style: TextStyle(color: Colors.grey)),
+                        const Text(
+                          'Estimated Tax (8%)',
+                          style: TextStyle(color: Colors.grey),
+                        ),
                         Text('\$${cartProvider.tax.toStringAsFixed(2)}'),
                       ],
                     ),
@@ -155,7 +187,10 @@ class CartScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Total',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           '\$${cartProvider.total.toStringAsFixed(2)}',
@@ -169,7 +204,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () => context.push('/checkout'),
+                      onPressed: () => context.push(AppRouter.cartPath),
                       child: const Text('Proceed to Checkout'),
                     ),
                   ],
