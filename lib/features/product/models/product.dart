@@ -1,6 +1,35 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
+/// An immutable domain entity representing an e-commerce product.
+///
+/// ### What is Immutability?
+/// An object is **immutable** when its internal state cannot be modified after it
+/// has been instantiated. All properties are declared `final`, preventing re-assignment:
+/// ```dart
+/// product.price = 19.99; // Compilation Error! Fields cannot be mutated.
+/// ```
+///
+/// ### Why Immutability is Essential for `Product`:
+/// 1. **Predictable & Bug-Free State:** Multiple screens (Product List, Product Detail,
+///    Cart, Favorites) can reference the exact same [Product] instance without fear
+///    that one screen or service will mutate its attributes unexpectedly.
+/// 2. **Reactive UI State Management:** In Flutter reactive architectures (Provider,
+///    Bloc, Riverpod), UI changes are triggered when a new state is emitted.
+///    Mutating an object in-place fails reference equality checks (`old == new` evaluates
+///    to `true`), leading to missed widget rebuilds. Immutability forces creation of a
+///    new instance via [copyWith]:
+///    ```dart
+///    final updatedProduct = product.copyWith(isFavourite: !product.isFavourite);
+///    ```
+/// 3. **Concurrency & Thread Safety:** Because data cannot change, background tasks,
+///    isolates, and asynchronous API caching layers can read from [Product] simultaneously
+///    without locks or race conditions.
+/// 4. **Flutter Compiler Optimization:** By combining `final` fields with a `const`
+///    constructor, Flutter can reuse canonical instances at compile time and optimize
+///    widget subtree rebuilds.
+/// 5. **Safe Collections:** [Product] can safely be placed in `Set` or used as a `Map`
+///    key because its identity and [hashCode] remain constant throughout its lifecycle.
 @immutable
 class Product {
   final int id;
