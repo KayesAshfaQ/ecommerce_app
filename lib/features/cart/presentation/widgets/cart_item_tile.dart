@@ -35,9 +35,9 @@ class CartItemTile extends StatelessWidget {
               width: 72,
               height: 72,
               color: isDark ? Colors.black26 : Colors.grey.shade100,
-              child: item.product.thumbnail?.isNotEmpty == true
+              child: item.product.thumbnail.isNotEmpty
                   ? Image.network(
-                      item.product.thumbnail ?? "",
+                      item.product.thumbnail,
                       fit: BoxFit.cover,
                       errorBuilder: (_, _, _) => const Center(
                         child: Icon(
@@ -64,7 +64,7 @@ class CartItemTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.product.title ?? "",
+                  item.product.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -74,7 +74,7 @@ class CartItemTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '\$${item.product.price?.toStringAsFixed(2)}',
+                  '\$${item.product.price.toStringAsFixed(2)}',
                   style: const TextStyle(
                     fontSize: 14,
                     color: AppColors.primary,
@@ -106,7 +106,7 @@ class CartItemTile extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   onPressed: () {
                     cartProvider.updateQuantity(
-                      item.product.id ?? 0,
+                      item.product.id,
                       item.quantity - 1,
                     );
                   },
@@ -127,7 +127,7 @@ class CartItemTile extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   onPressed: () {
                     cartProvider.updateQuantity(
-                      item.product.id ?? 0,
+                      item.product.id,
                       item.quantity + 1,
                     );
                   },

@@ -8,7 +8,7 @@ class CartItem {
     required this.product,
     this.quantity = 1,
   });
-  double get totalPrice => (product.price ?? 0) * quantity;
+  double get totalPrice => product.price * quantity;
 
   CartItem copyWith({
     Product? product,

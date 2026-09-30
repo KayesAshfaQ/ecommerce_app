@@ -105,7 +105,7 @@ class CartScreen extends StatelessWidget {
                     child: const Icon(CupertinoIcons.delete, color: Colors.white),
                   ),
                   onDismissed: (_) {
-                    cartProvider.removeItem(item.product.id ?? 0);
+                    cartProvider.removeItem(item.product.id);
                   },
                   child: CartItemTile(item: item),
                 );

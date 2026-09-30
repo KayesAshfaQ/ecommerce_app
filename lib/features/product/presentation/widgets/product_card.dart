@@ -18,7 +18,7 @@ class ProductCard extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
-      onTap: () => context.push(AppRouter.productDetailRoute(product.id!)),
+      onTap: () => context.push(AppRouter.productDetailRoute(product.id)),
       child: Container(
         decoration: BoxDecoration(
           color: isDark ? AppColors.cardDark : AppColors.cardLight,
@@ -49,9 +49,9 @@ class ProductCard extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       color: isDark ? Colors.black26 : Colors.grey.shade100,
-                      child: product.thumbnail?.isNotEmpty == true
+                      child: product.thumbnail.isNotEmpty
                           ? Image.network(
-                              product.thumbnail!,
+                              product.thumbnail,
                               fit: BoxFit.cover,
                               errorBuilder: (ctx, err, stack) => const Center(
                                 child: Icon(
@@ -70,7 +70,7 @@ class ProductCard extends StatelessWidget {
                             ),
                     ),
                   ),
-                  if (product.rating! > 0)
+                  if (product.rating > 0)
                     Positioned(
                       top: 8,
                       right: 8,
@@ -93,7 +93,7 @@ class ProductCard extends StatelessWidget {
                             ),
                             const SizedBox(width: 2),
                             Text(
-                              product.rating!.toStringAsFixed(1),
+                              product.rating.toStringAsFixed(1),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
@@ -114,7 +114,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.category!.toUpperCase(),
+                    product.category.toUpperCase(),
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
@@ -126,7 +126,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    product.title ?? '',
+                    product.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -142,7 +142,7 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$${product.price?.toStringAsFixed(2)}',
+                        '\$${product.price.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
