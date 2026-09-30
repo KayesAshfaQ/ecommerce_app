@@ -1,14 +1,13 @@
-import 'package:flutter/foundation.dart';
-
 class ApiConstants {
   ApiConstants._();
 
-  static String get baseUrl {
+  static String get baseUrl => 'https://dummyjson.com';
+  /* {
     if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
       return 'http://10.0.2.2:3001';
     }
     return 'http://localhost:3001';
-  }
+  } */
 
   static const Duration connectTimeout = Duration(seconds: 15);
   static const Duration receiveTimeout = Duration(seconds: 15);

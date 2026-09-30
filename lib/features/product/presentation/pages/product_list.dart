@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,9 +18,11 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   final TextEditingController _searchController = TextEditingController();
+  Timer? _debounce;
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
   }
@@ -108,7 +112,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             child: TextField(
               controller: _searchController,
-              onChanged: (val) => productProvider.search(val),
+              onChanged: (val) {
+                _debounce?.cancel();
+                _debounce = Timer(const Duration(milliseconds: 500), () {
+                  productProvider.search(val);
+                });
+              },
               decoration: InputDecoration(
                 hintText: 'Search electronics, watches, fashion...',
                 prefixIcon: const Icon(CupertinoIcons.search, size: 20),
@@ -119,6 +128,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                           size: 18,
                         ),
                         onPressed: () {
+                          _debounce?.cancel();
                           _searchController.clear();
                           productProvider.search('');
                         },
