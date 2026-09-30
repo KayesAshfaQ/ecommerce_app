@@ -33,7 +33,11 @@ class ProductRepositoryImpl implements ProductRepository {
       final response = await dioClient.get(endpoint, queryParameters: params);
       final data = response.data;
 
-      if (data is Map<String, dynamic> && data['products'] is List) {
+      if (data is List) {
+        return data
+            .map((e) => Product.fromMap(e as Map<String, dynamic>))
+            .toList();
+      } else if (data is Map<String, dynamic> && data['products'] is List) {
         final List<dynamic> rawList = data['products'];
         return rawList
             .map((item) => Product.fromMap(item as Map<String, dynamic>))
@@ -51,9 +55,7 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Product> getProductById(int id) async {
     try {
-      final response = await dioClient.get(
-        '${ApiConstants.products}/$id',
-      );
+      final response = await dioClient.get('${ApiConstants.products}/$id');
       if (response.data is Map<String, dynamic>) {
         return Product.fromMap(response.data as Map<String, dynamic>);
       }

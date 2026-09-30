@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/product/presentation/pages/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,13 +15,12 @@ class AppRouter {
   static String productDetailRoute(int id) => '/products/$id';
 
   static final GoRouter router = GoRouter(
-    initialLocation: productDetailPath,
+    initialLocation: homePath,
     routes: [
       GoRoute(
         path: homePath,
         name: 'home',
-        builder: (context, state) =>
-            const Scaffold(body: Center(child: Text('Products Catalog'))),
+        builder: (context, state) => ProductListScreen(),
       ),
       GoRoute(
         path: productDetailPath,

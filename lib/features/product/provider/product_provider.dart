@@ -14,13 +14,10 @@ class ProductProvider extends ChangeNotifier {
   bool _isLoading = false;
   String? _errorMessage;
 
-  ProductProvider({
-    required this.productRepository,
-    this.autoFetch = true,
-  }) {
+  ProductProvider({required this.productRepository, this.autoFetch = true}) {
     if (autoFetch) {
-      // fetchProducts();
-      // fetchCategories();
+      fetchProducts();
+      fetchCategories();
     }
   }
 
