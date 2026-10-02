@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/router/app_router.dart';
+import 'package:ecommerce_app/core/widgets/custom_cached_image.dart';
 import 'package:ecommerce_app/features/cart/models/cart_item.dart';
 import 'package:ecommerce_app/features/cart/provider/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -55,25 +56,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   height: 320,
                   width: double.infinity,
                   color: isDark ? Colors.black38 : Colors.grey.shade100,
-                  child: product.thumbnail.isNotEmpty
-                      ? Image.network(
-                          product.thumbnail,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, _, _) => const Center(
-                            child: Icon(
-                              CupertinoIcons.photo,
-                              size: 60,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        )
-                      : const Center(
-                          child: Icon(
-                            CupertinoIcons.cube_box,
-                            size: 60,
-                            color: Colors.grey,
-                          ),
-                        ),
+                  child: CustomCachedImage(
+                    imageUrl: product.thumbnail,
+                    fit: BoxFit.cover,
+                    iconSize: 60,
+                  ),
                 ),
 
                 Padding(

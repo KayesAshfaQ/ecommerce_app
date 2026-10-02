@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/widgets/custom_cached_image.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../models/cart_item.dart';
 import '../../provider/cart_provider.dart';
@@ -35,25 +36,11 @@ class CartItemTile extends StatelessWidget {
               width: 72,
               height: 72,
               color: isDark ? Colors.black26 : Colors.grey.shade100,
-              child: item.product.thumbnail.isNotEmpty
-                  ? Image.network(
-                      item.product.thumbnail,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const Center(
-                        child: Icon(
-                          CupertinoIcons.photo,
-                          size: 28,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    )
-                  : const Center(
-                      child: Icon(
-                        CupertinoIcons.cube_box,
-                        size: 28,
-                        color: Colors.grey,
-                      ),
-                    ),
+              child: CustomCachedImage(
+                imageUrl: item.product.thumbnail,
+                fit: BoxFit.cover,
+                iconSize: 28,
+              ),
             ),
           ),
           const SizedBox(width: 14),

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/router/app_router.dart';
+import 'package:ecommerce_app/core/widgets/custom_cached_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -49,25 +50,11 @@ class ProductCard extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       color: isDark ? Colors.black26 : Colors.grey.shade100,
-                      child: product.thumbnail.isNotEmpty
-                          ? Image.network(
-                              product.thumbnail,
-                              fit: BoxFit.cover,
-                              errorBuilder: (ctx, err, stack) => const Center(
-                                child: Icon(
-                                  CupertinoIcons.photo,
-                                  size: 40,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            )
-                          : const Center(
-                              child: Icon(
-                                CupertinoIcons.cube_box,
-                                size: 40,
-                                color: Colors.grey,
-                              ),
-                            ),
+                      child: CustomCachedImage(
+                        imageUrl: product.thumbnail,
+                        fit: BoxFit.cover,
+                        iconSize: 40,
+                      ),
                     ),
                   ),
                   if (product.rating > 0)
