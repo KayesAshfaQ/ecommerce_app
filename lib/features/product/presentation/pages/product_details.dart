@@ -1,12 +1,12 @@
-import 'package:ecommerce_app/core/router/app_router.dart';
-import 'package:ecommerce_app/core/widgets/custom_cached_image.dart';
-import 'package:ecommerce_app/features/cart/models/cart_item.dart';
-import 'package:ecommerce_app/features/cart/provider/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../../core/widgets/custom_cached_image.dart';
+import '../../../cart/models/cart_item.dart';
+import '../../../cart/provider/cart_provider.dart';
 import '../../provider/product_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -32,19 +32,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final productProvider = context.watch<ProductProvider>();
-    final product = productProvider.selectedProduct;
+    final product = productProvider.selectedProduct?.id == widget.productId
+        ? productProvider.selectedProduct
+        : null;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Product Details')),
       body: Builder(
         builder: (context) {
-          if (productProvider.isLoading && product == null) {
-            return const Center(child: CupertinoActivityIndicator());
-          }
-
           if (product == null) {
-            return const Center(child: Text('Product not found'));
+            if (productProvider.errorMessage != null &&
+                !productProvider.isLoading) {
+              return Center(
+                child: Text(
+                  productProvider.errorMessage ?? 'Product not found',
+                ),
+              );
+            }
+            return const Center(child: CupertinoActivityIndicator());
           }
 
           return SingleChildScrollView(

@@ -62,7 +62,12 @@ class ProductProvider extends ChangeNotifier {
   }
 
   Future<void> fetchProductById(int id) async {
-    _isLoading = true;
+    if (_selectedProduct?.id != id) {
+      // Look up in existing catalog products for immediate display without flash
+      _selectedProduct = _products.where((p) => p.id == id).firstOrNull;
+    }
+
+    _isLoading = _selectedProduct == null;
     _errorMessage = null;
     notifyListeners();
 
