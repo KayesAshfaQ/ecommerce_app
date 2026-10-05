@@ -54,4 +54,32 @@ class PreferenceService {
       return [];
     }
   }
+
+  int? getCloudCartId() => _prefs.getInt(ApiConstants.cloudCartIdKey);
+
+  Future<bool> setCloudCartId(int? id) async {
+    if (id == null) {
+      return await _prefs.remove(ApiConstants.cloudCartIdKey);
+    }
+    return await _prefs.setInt(ApiConstants.cloudCartIdKey, id);
+  }
+
+  DateTime? getLastCartSync() {
+    final millis = _prefs.getInt(ApiConstants.lastCartSyncKey);
+    return millis != null ? DateTime.fromMillisecondsSinceEpoch(millis) : null;
+  }
+
+  Future<bool> setLastCartSync(DateTime time) async {
+    return await _prefs.setInt(
+      ApiConstants.lastCartSyncKey,
+      time.millisecondsSinceEpoch,
+    );
+  }
+
+  bool hasPendingCartSync() =>
+      _prefs.getBool(ApiConstants.pendingCartSyncKey) ?? false;
+
+  Future<bool> setPendingCartSync(bool pending) async {
+    return await _prefs.setBool(ApiConstants.pendingCartSyncKey, pending);
+  }
 }

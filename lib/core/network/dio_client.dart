@@ -8,7 +8,8 @@ class DioClient {
   final PreferenceService preferenceService;
 
   DioClient({required this.preferenceService, Dio? dio}) {
-    _dio = dio ??
+    _dio =
+        dio ??
         Dio(
           BaseOptions(
             baseUrl: ApiConstants.baseUrl,
@@ -67,6 +68,66 @@ class DioClient {
     }
   }
 
+  Future<Response<dynamic>> post(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    try {
+      return await _dio.post(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
+    } on DioException catch (e) {
+      throw _mapDioException(e);
+    } catch (e) {
+      throw ApiException(e.toString());
+    }
+  }
+
+  Future<Response<dynamic>> put(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    try {
+      return await _dio.put(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
+    } on DioException catch (e) {
+      throw _mapDioException(e);
+    } catch (e) {
+      throw ApiException(e.toString());
+    }
+  }
+
+  Future<Response<dynamic>> delete(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    try {
+      return await _dio.delete(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
+    } on DioException catch (e) {
+      throw _mapDioException(e);
+    } catch (e) {
+      throw ApiException(e.toString());
+    }
+  }
+
   ApiException _mapDioException(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
@@ -83,7 +144,7 @@ class DioClient {
         }
         final message = (error.response?.data is Map<String, dynamic>)
             ? (error.response?.data['message']?.toString() ??
-                'Server error ($statusCode)')
+                  'Server error ($statusCode)')
             : 'Server error ($statusCode)';
         return ServerException(message, statusCode);
       case DioExceptionType.cancel:
@@ -92,7 +153,9 @@ class DioClient {
         return const ApiException('Invalid SSL certificate');
       case DioExceptionType.unknown:
       default:
-        return ApiException(error.message ?? 'An unexpected network error occurred');
+        return ApiException(
+          error.message ?? 'An unexpected network error occurred',
+        );
     }
   }
 }

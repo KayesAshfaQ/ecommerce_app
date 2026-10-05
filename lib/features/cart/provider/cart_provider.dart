@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/cart_item.dart';
-import '../repository/cart_repository.dart';
+import '../data/cart_repository.dart';
 
 class CartProvider extends ChangeNotifier {
   final CartRepository cartRepository;
