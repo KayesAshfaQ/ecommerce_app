@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/cart/models/sync_status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import '../../../../../core/constants/app_colors.dart';
 import '../../../../core/router/app_router.dart';
 import '../../provider/cart_provider.dart';
 import '../widgets/cart_item_tile.dart';
+import '../widgets/cart_sync_indicator.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -20,6 +22,7 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Shopping Cart'),
         actions: [
+          const CartSyncIndicator(),
           if (cartProvider.items.isNotEmpty)
             IconButton(
               icon: const Icon(CupertinoIcons.trash),
@@ -96,43 +99,84 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
             )
-          : ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemCount: cartProvider.items.length,
-              separatorBuilder: (_, _) => const SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                final item = cartProvider.items[index];
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Container(
-                          alignment: Alignment.centerRight,
-                          padding: const EdgeInsets.only(right: 20),
-                          decoration: BoxDecoration(
-                            color: AppColors.error,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: const Icon(
-                            CupertinoIcons.delete,
-                            color: Colors.white,
+          : Column(
+              children: [
+                if (cartProvider.syncStatus == SyncStatus.offline)
+                  Container(
+                    color: Colors.amber.shade800.withValues(alpha: 0.12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.wifi_slash,
+                          size: 16,
+                          color: Colors.amber,
+                        ),
+                        const SizedBox(width: 8),
+                        const Expanded(
+                          child: Text(
+                            'Working offline. Changes will sync when online.',
+                            style: TextStyle(fontSize: 12),
                           ),
                         ),
-                      ),
-                      Dismissible(
-                        key: ValueKey(item.product.id),
-                        direction: DismissDirection.endToStart,
-                        background: const SizedBox.shrink(),
-                        onDismissed: (_) {
-                          cartProvider.removeItem(item.product.id);
-                        },
-                        child: CartItemTile(item: item),
-                      ),
-                    ],
+                        TextButton(
+                          onPressed: () => cartProvider.syncNow(),
+                          child: const Text(
+                            'Sync',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
+
+                Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () => cartProvider.syncNow(),
+                    child: ListView.separated(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: cartProvider.items.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        final item = cartProvider.items[index];
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Container(
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.only(right: 20),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.error,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: const Icon(
+                                    CupertinoIcons.delete,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Dismissible(
+                                key: ValueKey(item.product.id),
+                                direction: DismissDirection.endToStart,
+                                background: const SizedBox.shrink(),
+                                onDismissed: (_) {
+                                  cartProvider.removeItem(item.product.id);
+                                },
+                                child: CartItemTile(item: item),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
       bottomNavigationBar: cartProvider.items.isEmpty
           ? null

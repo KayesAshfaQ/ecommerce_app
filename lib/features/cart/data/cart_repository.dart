@@ -14,7 +14,7 @@ abstract class CartRepository {
     required int userId,
     required List<CartItem> items,
   });
-  Future<void> deleteCart();
+  Future<void> deleteCloudCart();
 
   int? getCloudCartId();
   Future<void> setCloudCartId(int? id);
@@ -95,7 +95,7 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  Future<void> deleteCart() async {
+  Future<void> deleteCloudCart() async {
     final cartId = preferenceService.getCloudCartId();
     if (cartId != null) {
       try {
