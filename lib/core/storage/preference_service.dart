@@ -13,13 +13,42 @@ class PreferenceService {
     return PreferenceService._(prefs);
   }
 
-  // Auth token helpers
+  // Auth token & session helpers
   String? getAuthToken() => _prefs.getString(ApiConstants.authTokenKey);
 
   Future<bool> setAuthToken(String token) =>
       _prefs.setString(ApiConstants.authTokenKey, token);
 
   Future<bool> clearAuthToken() => _prefs.remove(ApiConstants.authTokenKey);
+
+  String? getRefreshToken() => _prefs.getString(ApiConstants.refreshTokenKey);
+
+  Future<bool> setRefreshToken(String token) =>
+      _prefs.setString(ApiConstants.refreshTokenKey, token);
+
+  Future<bool> clearRefreshToken() =>
+      _prefs.remove(ApiConstants.refreshTokenKey);
+
+  Map<String, dynamic>? getUserData() {
+    final raw = _prefs.getString(ApiConstants.userDataKey);
+    if (raw == null || raw.isEmpty) return null;
+    try {
+      return jsonDecode(raw) as Map<String, dynamic>;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<bool> setUserData(Map<String, dynamic> userMap) =>
+      _prefs.setString(ApiConstants.userDataKey, jsonEncode(userMap));
+
+  Future<bool> clearUserData() => _prefs.remove(ApiConstants.userDataKey);
+
+  Future<void> clearAuthSession() async {
+    await clearAuthToken();
+    await clearRefreshToken();
+    await clearUserData();
+  }
 
   // Generic key-value helpers
   String? getString(String key) => _prefs.getString(key);

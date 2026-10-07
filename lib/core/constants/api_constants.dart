@@ -23,9 +23,15 @@ class ApiConstants {
   static const String addCart = '/carts/add';
   static String userCart(int userId) => '/carts/user/$userId';
   static String cartById(int cartId) => '/carts/$cartId';
+  static const String authLogin = '/auth/login';
+  static const String authMe = '/auth/me';
+  static const String authRefresh = '/auth/refresh';
+  static const String users = '/users';
 
   // Storage Keys
   static const String authTokenKey = 'auth_token';
+  static const String refreshTokenKey = 'refresh_token';
+  static const String userDataKey = 'auth_user_data';
   static const String cachedProductsKey = 'cached_products_list';
   static const String cachedCartKey = 'cached_cart_items';
   static const String favoriteProductIdsKey = 'favorite_product_ids';

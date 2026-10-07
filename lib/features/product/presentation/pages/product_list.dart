@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../auth/provider/auth_provider.dart';
 import '../../../cart/provider/cart_provider.dart';
 import '../../provider/product_provider.dart';
 import '../widgets/product_card.dart';
@@ -32,6 +33,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     final productProvider = context.watch<ProductProvider>();
     final cartProvider = context.watch<CartProvider>();
+    final authProvider = context.watch<AuthProvider>();
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -56,16 +58,33 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(CupertinoIcons.person_crop_circle),
-            tooltip: 'Profile',
+            icon: authProvider.isAuthenticated
+                ? Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      const Icon(CupertinoIcons.person_crop_circle_fill),
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          width: 8,
+                          height: 8,
+                          decoration: const BoxDecoration(
+                            color: AppColors.success,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : const Icon(CupertinoIcons.person_crop_circle),
+            tooltip: authProvider.isAuthenticated ? 'Account' : 'Sign In',
             onPressed: () {
-              /* => context.push('/profile') */
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Comin soon...'),
-                  duration: Duration(seconds: 1),
-                ),
-              );
+              if (authProvider.isAuthenticated) {
+                context.push(AppRouter.profilePath);
+              } else {
+                context.push(AppRouter.signinPath);
+              }
             },
           ),
           IconButton(

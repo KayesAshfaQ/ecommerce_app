@@ -16,7 +16,11 @@ class CartProvider extends ChangeNotifier {
   int _userId = 1;
   Timer? _debounceTimer;
 
-  CartProvider({required this.cartRepository, this.autoLoad = true}) {
+  CartProvider({
+    required this.cartRepository,
+    this.autoLoad = true,
+    int? initialUserId,
+  }) : _userId = initialUserId ?? 1 {
     if (autoLoad) {
       _loadInitialCart();
     }

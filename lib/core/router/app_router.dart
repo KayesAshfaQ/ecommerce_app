@@ -2,6 +2,8 @@ import 'package:ecommerce_app/features/product/presentation/pages/product_list.d
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/presentation/pages/profile_page.dart';
+import '../../features/auth/presentation/pages/signin_page.dart';
 import '../../features/cart/presentation/pages/cart_screen.dart';
 import '../../features/product/presentation/pages/product_details.dart';
 
@@ -11,6 +13,8 @@ class AppRouter {
   static const String homePath = '/';
   static const String _productDetailPath = '/product/:id';
   static const String cartPath = '/cart';
+  static const String signinPath = '/signin';
+  static const String profilePath = '/profile';
 
   static String productDetailRoute(int id) => '/product/$id';
 
@@ -34,6 +38,19 @@ class AppRouter {
         path: cartPath,
         name: 'cart',
         builder: (context, state) => const CartScreen(),
+      ),
+      GoRoute(
+        path: signinPath,
+        name: 'signin',
+        builder: (context, state) {
+          final redirect = state.uri.queryParameters['redirect'];
+          return SignInPage(redirect: redirect);
+        },
+      ),
+      GoRoute(
+        path: profilePath,
+        name: 'profile',
+        builder: (context, state) => const ProfilePage(),
       ),
     ],
     errorBuilder: (context, state) => Scaffold(
