@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/pages/profile_page.dart';
 import '../../features/auth/presentation/pages/signin_page.dart';
 import '../../features/cart/presentation/pages/cart_screen.dart';
+import '../../features/order/presentation/checkout_page.dart';
+import '../../features/order/presentation/order_success_page.dart';
+import '../../features/order/presentation/orders_page.dart';
 import '../../features/product/presentation/pages/product_details.dart';
 
 class AppRouter {
@@ -15,8 +18,12 @@ class AppRouter {
   static const String cartPath = '/cart';
   static const String signinPath = '/signin';
   static const String profilePath = '/profile';
+  static const String checkoutPath = '/checkout';
+  static const String _orderSuccessPath = '/orderSuccess/:orderId';
+  static const String ordersPath = '/orders';
 
   static String productDetailRoute(int id) => '/product/$id';
+  static String orderSuccessRoute(String orderId) => '/orderSuccess/$orderId';
 
   static final GoRouter router = GoRouter(
     initialLocation: homePath,
@@ -51,6 +58,21 @@ class AppRouter {
         path: profilePath,
         name: 'profile',
         builder: (context, state) => const ProfilePage(),
+      ),
+      GoRoute(
+        path: checkoutPath,
+        name: 'checkout',
+        builder: (context, state) => const CheckoutPage(),
+      ),
+      GoRoute(
+        path: _orderSuccessPath,
+        name: 'orderSuccess',
+        builder: (context, state) => const OrderSuccessPage(),
+      ),
+      GoRoute(
+        path: ordersPath,
+        name: 'orders',
+        builder: (context, state) => const OrdersPage(),
       ),
     ],
     errorBuilder: (context, state) => Scaffold(
