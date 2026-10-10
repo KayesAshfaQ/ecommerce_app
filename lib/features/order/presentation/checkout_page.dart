@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../core/router/app_router.dart';
 import '../../auth/provider/auth_provider.dart';
+import '../../cart/presentation/widgets/cart_item_tile.dart';
 import '../../cart/provider/cart_provider.dart';
 import '../models/shipping_address_model.dart';
 import '../providers/order_provider.dart';
@@ -245,8 +246,62 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
                   const SizedBox(height: 24),
 
+                  // 2. Products Section
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.cardDark : AppColors.cardLight,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: isDark
+                            ? AppColors.borderDark
+                            : AppColors.borderLight,
+                      ),
+                    ),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.all(16),
+                      itemCount: cartProvider.items.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        final item = cartProvider.items[index];
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Container(
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.only(right: 20),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.error,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: const Icon(
+                                    CupertinoIcons.delete,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Dismissible(
+                                key: ValueKey(item.product.id),
+                                direction: DismissDirection.endToStart,
+                                background: const SizedBox.shrink(),
+                                onDismissed: (_) {
+                                  cartProvider.removeItem(item.product.id);
+                                },
+                                child: CartItemTile(item: item),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
                   // 2. Payment Method Section
-                  Text(
+                  /*Text(
                     'Payment Method',
                     style: TextStyle(
                       fontSize: 16,
@@ -257,7 +312,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  /* Container(
+                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: isDark ? AppColors.cardDark : AppColors.cardLight,
@@ -282,7 +337,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       }).toList(),
                     ),
                   ), */
-
                   const SizedBox(height: 24),
 
                   // 3. Order Summary Section
@@ -379,7 +433,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
                   // Place Order Action Button
                   ElevatedButton(
-                    onPressed: orderProvider.isSubmitting ? null : _handlePlaceOrder,
+                    onPressed: orderProvider.isSubmitting
+                        ? null
+                        : _handlePlaceOrder,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),

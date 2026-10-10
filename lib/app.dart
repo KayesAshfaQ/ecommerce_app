@@ -1,5 +1,8 @@
+import 'package:ecommerce_app/core/constants/api_constants.dart';
 import 'package:ecommerce_app/features/cart/provider/cart_provider.dart';
 import 'package:ecommerce_app/features/cart/data/cart_repository.dart';
+import 'package:ecommerce_app/features/order/data/order_repository.dart';
+import 'package:ecommerce_app/features/order/providers/order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +54,16 @@ class MyApp extends StatelessWidget {
               remoteDatasource: CartRemoteDatasourceImpl(dioClient: dioClient),
             ),
             initialUserId: initialUserId,
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => OrderProvider(
+            orderRepository: OrderRepositoryImpl(
+              dioClient: DioClient(
+                preferenceService: preferenceService,
+                baseUrl: ApiConstants.orderBaseUrl,
+              ),
+            ),
           ),
         ),
       ],
