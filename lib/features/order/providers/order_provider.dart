@@ -2,6 +2,7 @@ import 'dart:math' show Random;
 
 import 'package:ecommerce_app/features/auth/models/user_model.dart';
 import 'package:ecommerce_app/features/cart/models/cart_item.dart';
+import 'package:ecommerce_app/features/order/models/payment_method.dart';
 import 'package:ecommerce_app/features/order/models/shipping_address_model.dart';
 import 'package:flutter/foundation.dart';
 
@@ -11,19 +12,33 @@ import '../models/order_model.dart';
 class OrderProvider extends ChangeNotifier {
   OrderRepository orderRepository;
 
+  bool _isSubmitting = false;
+  PaymentMethod _selectedPaymentMethod = PaymentMethod.cashOnDelivery;
+  bool _isGatewayLoading = false;
   List<OrderModel> _orders = [];
   OrderModel? _latestOrder;
-  bool _isSubmitting = false;
   bool _isLoadingHistory = false;
   String? _errorMessage;
 
+  bool get isSubmitting => _isSubmitting;
+  PaymentMethod get selectedPaymentMethod => _selectedPaymentMethod;
+  bool get isGatewayLoading => _isGatewayLoading;
   List<OrderModel> get orders => _orders;
   OrderModel? get latestOrder => _latestOrder;
-  bool get isSubmitting => _isSubmitting;
   bool get isLoadingHistory => _isLoadingHistory;
   String? get errorMessage => _errorMessage;
 
   OrderProvider({required this.orderRepository});
+
+  void updateSelectedPaymentMethod(PaymentMethod method) {
+    if (_selectedPaymentMethod == method) return;
+    _selectedPaymentMethod = method;
+    notifyListeners();
+  }
+
+  String generateTransactionId() {
+    return 'EVR-AAM-${DateTime.now().millisecondsSinceEpoch}';
+  }
 
   ShippingAddressModel getInitialShippingAddress(UserModel? user) {
     if (user != null) {
@@ -44,7 +59,20 @@ class OrderProvider extends ChangeNotifier {
     );
   }
 
-/*   Future<OrderModel?> placeOrder({
+    void setGatewayLoading(bool loading) {
+    _isGatewayLoading = loading;
+    notifyListeners();
+  }
+
+  void resetCheckoutState() {
+    _selectedPaymentMethod = PaymentMethod.cashOnDelivery;
+    _isGatewayLoading = false;
+    _isSubmitting = false;
+    _errorMessage = null;
+    notifyListeners();
+  }
+
+  /*   Future<OrderModel?> placeOrder({
     required List<CartItem> items,
     required double subtotal,
     required double tax,
@@ -57,8 +85,6 @@ class OrderProvider extends ChangeNotifier {
   }) async {
     throw Exception();
   } */
-
-
 
   Future<OrderModel?> placeOrder({
     required List<CartItem> items,
@@ -76,7 +102,8 @@ class OrderProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final orderId = 'EVR-${DateTime.now().millisecondsSinceEpoch}-${Random().nextInt(900) + 100}';
+      final orderId =
+          'EVR-${DateTime.now().millisecondsSinceEpoch}-${Random().nextInt(900) + 100}';
       final newOrder = OrderModel(
         id: orderId,
         userId: user?.id ?? 0,

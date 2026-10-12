@@ -8,8 +8,10 @@ import '../../../core/router/app_router.dart';
 import '../../auth/provider/auth_provider.dart';
 import '../../cart/presentation/widgets/cart_item_tile.dart';
 import '../../cart/provider/cart_provider.dart';
+import '../models/payment_method.dart';
 import '../models/shipping_address_model.dart';
 import '../providers/order_provider.dart';
+import 'widgets/payment_option.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
@@ -300,8 +302,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                   ),
 
-                  // 2. Payment Method Section
-                  /*Text(
+                  const SizedBox(height: 24),
+
+                  // 3. Payment Method Section
+                  Text(
                     'Payment Method',
                     style: TextStyle(
                       fontSize: 16,
@@ -312,13 +316,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                   Container(
+                  Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: isDark ? AppColors.cardDark : AppColors.cardLight,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                        color: isDark
+                            ? AppColors.borderDark
+                            : AppColors.borderLight,
                       ),
                     ),
                     child: Column(
@@ -326,17 +332,17 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         final isLast = method == PaymentMethod.values.last;
                         return Padding(
                           padding: EdgeInsets.only(bottom: isLast ? 0 : 8),
-                          child: _buildPaymentOption(
+                          child: PaymentOption(
                             method: method,
                             isDark: isDark,
                             currentSelection:
                                 orderProvider.selectedPaymentMethod,
-                            onSelect: orderProvider.setPaymentMethod,
+                            onSelect: orderProvider.updateSelectedPaymentMethod,
                           ),
                         );
                       }).toList(),
                     ),
-                  ), */
+                  ),
                   const SizedBox(height: 24),
 
                   // 3. Order Summary Section

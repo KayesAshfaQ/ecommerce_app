@@ -1,7 +1,9 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../models/payment_method.dart';
 
 class PaymentOption extends StatelessWidget {
   const PaymentOption({
@@ -12,10 +14,10 @@ class PaymentOption extends StatelessWidget {
     required this.onSelect,
   });
 
-  final String method;
+  final PaymentMethod method;
   final bool isDark;
-  final String currentSelection;
-  final Function(String) onSelect;
+  final PaymentMethod currentSelection;
+  final Function(PaymentMethod) onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class PaymentOption extends StatelessWidget {
         child: Row(
           children: [
             Icon(
-              CupertinoIcons.money_dollar, // method.icon
+              method.icon,
               color: isSelected ? AppColors.primary : Colors.grey,
               size: 24,
             ),
@@ -50,7 +52,7 @@ class PaymentOption extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'method.title',
+                    method.title,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -61,7 +63,7 @@ class PaymentOption extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'method.subtitle',
+                    method.subtitle,
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ],
