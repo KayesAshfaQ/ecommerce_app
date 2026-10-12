@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/constants/api_constants.dart';
+import 'package:ecommerce_app/core/constants/payment_constatns.dart';
 import 'package:ecommerce_app/features/cart/provider/cart_provider.dart';
 import 'package:ecommerce_app/features/cart/data/cart_repository.dart';
 import 'package:ecommerce_app/features/order/data/order_repository.dart';
@@ -14,6 +15,7 @@ import 'features/auth/data/auth_remote_datasource.dart';
 import 'features/auth/data/auth_repository.dart';
 import 'features/auth/provider/auth_provider.dart';
 import 'features/cart/data/cart_remote_datasource.dart';
+import 'features/payment/data/payment_repository.dart';
 import 'features/product/data/product_repository.dart';
 import 'features/product/provider/product_provider.dart';
 
@@ -62,6 +64,12 @@ class MyApp extends StatelessWidget {
               dioClient: DioClient(
                 preferenceService: preferenceService,
                 baseUrl: ApiConstants.orderBaseUrl,
+              ),
+            ),
+            paymentRepository: AmarPayRepositoryImpl(
+              dioClient: DioClient(
+                preferenceService: preferenceService,
+                baseUrl: PaymentConstants.sandboxBaseUrl,
               ),
             ),
           ),

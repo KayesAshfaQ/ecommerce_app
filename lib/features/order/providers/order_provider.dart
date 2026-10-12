@@ -6,11 +6,13 @@ import 'package:ecommerce_app/features/order/models/payment_method.dart';
 import 'package:ecommerce_app/features/order/models/shipping_address_model.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../payment/data/payment_repository.dart';
 import '../data/order_repository.dart';
 import '../models/order_model.dart';
 
 class OrderProvider extends ChangeNotifier {
-  OrderRepository orderRepository;
+  final OrderRepository orderRepository;
+  final PaymentRepository paymentRepository;
 
   bool _isSubmitting = false;
   PaymentMethod _selectedPaymentMethod = PaymentMethod.cashOnDelivery;
@@ -28,7 +30,10 @@ class OrderProvider extends ChangeNotifier {
   bool get isLoadingHistory => _isLoadingHistory;
   String? get errorMessage => _errorMessage;
 
-  OrderProvider({required this.orderRepository});
+  OrderProvider({
+    required this.orderRepository,
+    required this.paymentRepository,
+  });
 
   void updateSelectedPaymentMethod(PaymentMethod method) {
     if (_selectedPaymentMethod == method) return;
@@ -59,7 +64,7 @@ class OrderProvider extends ChangeNotifier {
     );
   }
 
-    void setGatewayLoading(bool loading) {
+  void setGatewayLoading(bool loading) {
     _isGatewayLoading = loading;
     notifyListeners();
   }
@@ -130,6 +135,39 @@ class OrderProvider extends ChangeNotifier {
       _isSubmitting = false;
       notifyListeners();
       return null;
+    }
+  }
+
+  Future<String> initiateAmarpayPayment({
+    required String transactionId,
+    required double amount,
+    required ShippingAddressModel address,
+    UserModel? user,
+    String? description,
+  }) async {
+    _isGatewayLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      final paymentUrl = await paymentRepository.initiatePayment(
+        transactionId: transactionId,
+        amount: amount,
+        customerName: address.fullName,
+        customerEmail: user?.email ?? '',
+        customerPhone: address.phone,
+        customerAddress: address.addressLine,
+        customerCity: address.city,
+        description: description ?? 'Payment for order',
+      );
+      _isGatewayLoading = false;
+      notifyListeners();
+      return paymentUrl;
+    } catch (e) {
+      _errorMessage = e.toString();
+      _isGatewayLoading = false;
+      notifyListeners();
+      rethrow;
     }
   }
 }
