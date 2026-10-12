@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/features/payment/presentation/payment_page.dart';
 import 'package:ecommerce_app/features/product/presentation/pages/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,6 +22,7 @@ class AppRouter {
   static const String checkoutPath = '/checkout';
   static const String _orderSuccessPath = '/orderSuccess/:orderId';
   static const String ordersPath = '/orders';
+  static const String paymentPath = '/payment';
 
   static String productDetailRoute(int id) => '/product/$id';
   static String orderSuccessRoute(String orderId) => '/orderSuccess/$orderId';
@@ -73,6 +75,19 @@ class AppRouter {
         path: ordersPath,
         name: 'orders',
         builder: (context, state) => const OrdersPage(),
+      ),
+      GoRoute(
+        path: paymentPath,
+        name: 'payment',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          final paymentUrl = extra['paymentUrl'] as String? ?? '';
+          final transactionId = extra['transactionId'] as String? ?? '';
+          return PaymentPage(
+            paymentUrl: paymentUrl,
+            transactionId: transactionId,
+          );
+        },
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

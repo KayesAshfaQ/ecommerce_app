@@ -21,6 +21,7 @@ class AmarPayRepositoryImpl implements PaymentRepository {
 
   AmarPayRepositoryImpl({required this.dioClient});
 
+  @override
   Future<String> initiatePayment({
     required String transactionId,
     required double amount,

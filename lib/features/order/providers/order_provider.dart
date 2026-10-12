@@ -77,27 +77,12 @@ class OrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*   Future<OrderModel?> placeOrder({
-    required List<CartItem> items,
-    required double subtotal,
-    required double tax,
-    required double total,
-    required ShippingAddressModel shippingAddress,
-    required paymentMethod,
-    required String paymentStatus,
-    String? transactionId,
-    required user,
-  }) async {
-    throw Exception();
-  } */
-
   Future<OrderModel?> placeOrder({
     required List<CartItem> items,
     required double subtotal,
     required double tax,
     required double total,
     required ShippingAddressModel shippingAddress,
-    String? paymentMethod,
     String? paymentStatus,
     String? transactionId,
     UserModel? user,
@@ -117,7 +102,7 @@ class OrderProvider extends ChangeNotifier {
         tax: tax,
         total: total,
         shippingAddress: shippingAddress,
-        paymentMethod: paymentMethod!,
+        paymentMethod: _selectedPaymentMethod.value,
         paymentStatus: paymentStatus,
         transactionId: transactionId,
         status: 'confirmed',
@@ -154,7 +139,7 @@ class OrderProvider extends ChangeNotifier {
         transactionId: transactionId,
         amount: amount,
         customerName: address.fullName,
-        customerEmail: user?.email ?? '',
+        customerEmail: user?.email ?? 'user@mail.com',
         customerPhone: address.phone,
         customerAddress: address.addressLine,
         customerCity: address.city,

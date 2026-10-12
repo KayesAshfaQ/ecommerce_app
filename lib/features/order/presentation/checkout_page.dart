@@ -8,6 +8,7 @@ import '../../../core/router/app_router.dart';
 import '../../auth/provider/auth_provider.dart';
 import '../../cart/presentation/widgets/cart_item_tile.dart';
 import '../../cart/provider/cart_provider.dart';
+import '../../payment/models/payment_result.dart';
 import '../models/payment_method.dart';
 import '../models/shipping_address_model.dart';
 import '../providers/order_provider.dart';
@@ -81,13 +82,72 @@ class _CheckoutPageState extends State<CheckoutPage> {
     String paymentStatus = 'pending';
     String? transactionId;
 
+    if (orderProvider.selectedPaymentMethod == PaymentMethod.amarpay) {
+      final txnId = orderProvider.generateTransactionId();
+
+      try {
+        final paymentUrl = await orderProvider.initiateAmarpayPayment(
+          transactionId: txnId,
+          amount: cartProvider.total,
+          address: address,
+          user: authProvider.user,
+        );
+
+        if (!mounted) return;
+
+        final paymentResult = await context.push<PaymentResult>(
+          AppRouter.paymentPath,
+          extra: {'paymentUrl': paymentUrl, 'transactionId': txnId},
+        );
+
+        if (!mounted) return;
+
+        if (paymentResult == null ||
+            paymentResult.status == PaymentStatus.cancelled) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Payment cancelled or failed.'),
+              backgroundColor: AppColors.error,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          return;
+        }
+
+        if (paymentResult.status == PaymentStatus.failed) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Payment failed at gateway.'),
+              backgroundColor: AppColors.error,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          return;
+        }
+
+        paymentStatus = 'paid';
+        transactionId = paymentResult.transactionId ?? txnId;
+      } catch (e) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Failed to initiate payment gateway: ${e.toString()}',
+            ),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+    }
+
     final placedOrder = await orderProvider.placeOrder(
       items: cartProvider.items,
       subtotal: cartProvider.subtotal,
       tax: cartProvider.tax,
       total: cartProvider.total,
       shippingAddress: address,
-      paymentMethod: 'cash_on_delivery',
       paymentStatus: paymentStatus,
       transactionId: transactionId,
       user: authProvider.user,
