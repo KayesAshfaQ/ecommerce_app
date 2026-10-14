@@ -1,4 +1,5 @@
 import '../../cart/models/cart_item.dart';
+import 'payment_method.dart';
 import 'shipping_address_model.dart';
 
 class OrderModel {
@@ -9,7 +10,7 @@ class OrderModel {
   final double tax;
   final double total;
   final ShippingAddressModel shippingAddress;
-  final String paymentMethod;
+  final PaymentMethod paymentMethod;
   final String? paymentStatus;
   final String? transactionId;
   final String status;
@@ -53,7 +54,7 @@ class OrderModel {
               postalCode: '',
               phone: '',
             ),
-      paymentMethod: json['paymentMethod'] as String,
+      paymentMethod: PaymentMethod.fromString(json['paymentMethod'] as String),
       paymentStatus: json['paymentStatus'] as String? ?? 'pending',
       transactionId: json['transactionId'] as String? ?? '',
       status: json['status'] as String? ?? 'confirmed',
@@ -72,7 +73,7 @@ class OrderModel {
       'tax': tax,
       'total': total,
       'shippingAddress': shippingAddress.toJson(),
-      'paymentMethod': paymentMethod,
+      'paymentMethod': paymentMethod.value,
       if (paymentStatus != null) 'paymentStatus': paymentStatus,
       if (transactionId != null) 'transactionId': transactionId,
       'status': status,
@@ -88,7 +89,7 @@ class OrderModel {
     double? tax,
     double? total,
     ShippingAddressModel? shippingAddress,
-    String? paymentMethod,
+    PaymentMethod? paymentMethod,
     String? paymentStatus,
     String? transactionId,
     String? status,

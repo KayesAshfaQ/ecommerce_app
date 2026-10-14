@@ -69,7 +69,10 @@ class AppRouter {
       GoRoute(
         path: _orderSuccessPath,
         name: 'orderSuccess',
-        builder: (context, state) => const OrderSuccessPage(),
+        builder: (context, state) {
+          final orderId = state.pathParameters['orderId'] ?? '';
+          return OrderSuccessPage(orderId: orderId);
+        },
       ),
       GoRoute(
         path: ordersPath,

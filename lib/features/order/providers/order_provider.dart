@@ -102,7 +102,7 @@ class OrderProvider extends ChangeNotifier {
         tax: tax,
         total: total,
         shippingAddress: shippingAddress,
-        paymentMethod: _selectedPaymentMethod.value,
+        paymentMethod: PaymentMethod.fromString(_selectedPaymentMethod.value),
         paymentStatus: paymentStatus,
         transactionId: transactionId,
         status: 'confirmed',
