@@ -35,6 +35,23 @@ class OrderProvider extends ChangeNotifier {
     required this.paymentRepository,
   });
 
+  int? _syncedUserId;
+
+  /// Called by a ProxyProvider whenever the auth user changes.
+  /// Prefetches order history on login / app start, clears it on logout.
+  void syncUser(int? userId) {
+    if (userId == _syncedUserId) return;
+    _syncedUserId = userId;
+    if (userId == null) {
+      _orders = [];
+      _latestOrder = null;
+      // Defer: update() runs during the build phase.
+      Future.microtask(notifyListeners);
+    } else {
+      Future.microtask(() => fetchOrderHistory(userId: userId));
+    }
+  }
+
   void updateSelectedPaymentMethod(PaymentMethod method) {
     if (_selectedPaymentMethod == method) return;
     _selectedPaymentMethod = method;
@@ -168,5 +185,23 @@ class OrderProvider extends ChangeNotifier {
       _isLoadingHistory = false;
       notifyListeners();
     }
+  }
+
+  // clear latest order
+  void clearLatestOrder() {
+    _latestOrder = null;
+    notifyListeners();
+  }
+
+  // clear order state
+  void clearOrderState() {
+    _isSubmitting = false;
+    _selectedPaymentMethod = PaymentMethod.cashOnDelivery;
+    _isGatewayLoading = false;
+    _orders = [];
+    _latestOrder = null;
+    _isLoadingHistory = false;
+    _errorMessage = null;
+    notifyListeners();
   }
 }

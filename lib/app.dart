@@ -58,7 +58,8 @@ class MyApp extends StatelessWidget {
             initialUserId: initialUserId,
           ),
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProxyProvider<AuthProvider, OrderProvider>(
+          update: (_, auth, order) => order!..syncUser(auth.user?.id),
           create: (_) => OrderProvider(
             orderRepository: OrderRepositoryImpl(
               dioClient: DioClient(

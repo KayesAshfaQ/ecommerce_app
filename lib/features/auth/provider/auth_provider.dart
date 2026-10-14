@@ -11,10 +11,7 @@ class AuthProvider extends ChangeNotifier {
   UserModel? _user;
   String? _errorMessage;
 
-  AuthProvider({
-    required this.authRepository,
-    bool autoCheck = true,
-  }) {
+  AuthProvider({required this.authRepository, bool autoCheck = true}) {
     if (autoCheck) {
       checkAuthStatus();
     }
@@ -23,7 +20,8 @@ class AuthProvider extends ChangeNotifier {
   AuthStatus get status => _status;
   UserModel? get user => _user;
   String? get errorMessage => _errorMessage;
-  bool get isAuthenticated => _status == AuthStatus.authenticated && _user != null;
+  bool get isAuthenticated =>
+      _status == AuthStatus.authenticated && _user != null;
   bool get isLoading => _status == AuthStatus.authenticating;
 
   Future<void> checkAuthStatus() async {
@@ -96,10 +94,8 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> logout() async {
     await authRepository.logout();
-    _user = null;
-    _status = AuthStatus.unauthenticated;
-    _errorMessage = null;
-    notifyListeners();
+
+    clearAuth();
   }
 
   void clearError() {
@@ -107,5 +103,12 @@ class AuthProvider extends ChangeNotifier {
       _errorMessage = null;
       notifyListeners();
     }
+  }
+
+  void clearAuth() {
+    _user = null;
+    _status = AuthStatus.unauthenticated;
+    _errorMessage = null;
+    notifyListeners();
   }
 }

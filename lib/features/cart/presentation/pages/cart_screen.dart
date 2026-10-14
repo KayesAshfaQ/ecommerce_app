@@ -6,12 +6,40 @@ import 'package:provider/provider.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../core/router/app_router.dart';
+import '../../../auth/provider/auth_provider.dart';
 import '../../provider/cart_provider.dart';
 import '../widgets/cart_item_tile.dart';
 import '../widgets/cart_sync_indicator.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
+
+  void _handleProceedCheckout(BuildContext context) {
+    if (context.read<CartProvider>().items.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Your cart is empty')));
+      return;
+    }
+
+    final authProvider = context.read<AuthProvider>();
+    if (!authProvider.isAuthenticated) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Please sign in to proceed to checkout'),
+          behavior: SnackBarBehavior.floating,
+          action: SnackBarAction(
+            label: 'Sign In',
+            onPressed: () => context.push(AppRouter.signinPath),
+          ),
+        ),
+      );
+      return;
+    }
+
+    context.push(AppRouter.checkoutPath);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +276,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () => context.push(AppRouter.checkoutPath),
+                      onPressed: () => _handleProceedCheckout(context),
                       child: const Text('Proceed to Checkout'),
                     ),
                   ],

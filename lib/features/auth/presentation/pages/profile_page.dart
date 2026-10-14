@@ -344,6 +344,7 @@ class ProfilePage extends StatelessWidget {
           TextButton(
             onPressed: () async {
               Navigator.pop(ctx);
+              context.read<OrderProvider>().clearOrderState();
               await context.read<AuthProvider>().logout();
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
