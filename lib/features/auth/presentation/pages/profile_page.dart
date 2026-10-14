@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../cart/provider/cart_provider.dart';
+import '../../../order/providers/order_provider.dart';
 import '../../provider/auth_provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -16,7 +17,9 @@ class ProfilePage extends StatelessWidget {
     final authProvider = context.watch<AuthProvider>();
     final cartProvider = context.watch<CartProvider>();
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final surfaceColor = isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
+    final surfaceColor = isDark
+        ? AppColors.surfaceDark
+        : AppColors.surfaceLight;
     final borderColor = isDark ? AppColors.borderDark : AppColors.borderLight;
     final user = authProvider.user;
 
@@ -83,7 +86,9 @@ class ProfilePage extends StatelessWidget {
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w700,
-            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            color: isDark
+                ? AppColors.textPrimaryDark
+                : AppColors.textPrimaryLight,
           ),
         ),
         const SizedBox(height: 8),
@@ -92,7 +97,9 @@ class ProfilePage extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14,
-            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+            color: isDark
+                ? AppColors.textSecondaryDark
+                : AppColors.textSecondaryLight,
           ),
         ),
         const SizedBox(height: 32),
@@ -132,8 +139,9 @@ class ProfilePage extends StatelessWidget {
               CircleAvatar(
                 radius: 36,
                 backgroundColor: AppColors.primaryLight,
-                backgroundImage:
-                    user.image.isNotEmpty ? NetworkImage(user.image) : null,
+                backgroundImage: user.image.isNotEmpty
+                    ? NetworkImage(user.image)
+                    : null,
                 child: user.image.isEmpty
                     ? Text(
                         user.initials,
@@ -220,7 +228,9 @@ class ProfilePage extends StatelessWidget {
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w700,
-            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            color: isDark
+                ? AppColors.textPrimaryDark
+                : AppColors.textPrimaryLight,
           ),
         ),
         const SizedBox(height: 10),
@@ -253,6 +263,16 @@ class ProfilePage extends StatelessWidget {
                 title: 'Cart Sync Status',
                 subtitle: cartProvider.syncStatus.name.toUpperCase(),
                 isDark: isDark,
+              ),
+              const Divider(height: 1),
+              _buildListTile(
+                icon: CupertinoIcons.list_bullet,
+                title: 'Order History',
+                subtitle: context.read<OrderProvider>().orders.isNotEmpty
+                    ? '${context.read<OrderProvider>().orders.length} order(s)'
+                    : 'No order history yet.',
+                isDark: isDark,
+                onTap: () => context.push(AppRouter.ordersPath),
               ),
             ],
           ),
@@ -289,14 +309,18 @@ class ProfilePage extends StatelessWidget {
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+          color: isDark
+              ? AppColors.textPrimaryDark
+              : AppColors.textPrimaryLight,
         ),
       ),
       subtitle: Text(
         subtitle,
         style: TextStyle(
           fontSize: 12,
-          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+          color: isDark
+              ? AppColors.textSecondaryDark
+              : AppColors.textSecondaryLight,
         ),
       ),
       trailing: trailing,

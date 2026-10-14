@@ -155,4 +155,18 @@ class OrderProvider extends ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> fetchOrderHistory({int? userId}) async {
+    _isLoadingHistory = true;
+    notifyListeners();
+    try {
+      _orders = await orderRepository.getOrders(userId: userId);
+      _isLoadingHistory = false;
+      notifyListeners();
+    } catch (e) {
+      _errorMessage = e.toString();
+      _isLoadingHistory = false;
+      notifyListeners();
+    }
+  }
 }
